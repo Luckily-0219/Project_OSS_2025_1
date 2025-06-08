@@ -56,7 +56,7 @@ class Calculator:
             self.expression = self.expression[:-1]
         elif char == 'HIST':
             self.show_history()
-        if char == '^':
+        elif char == '^':
             self.expression += '**'
         elif char == '√':
             self.expression += 'math.sqrt('
@@ -77,6 +77,7 @@ class Calculator:
         elif char == '=':
             try:
                 result = str(eval(self.expression, {'__builtins__': None}, {'math': math}))
+                result = str(eval(self.expression))
                 self.history.append(f"{self.expression} = {result}")
                 self.history_list.insert(0, f"{self.expression} = {result}")
                 self.expression = result
@@ -84,8 +85,10 @@ class Calculator:
                 self.expression = "Error"
         else:
             self.expression += str(char)
+            
+        self.entry.delete(0, tk.END)
+        self.entry.insert(tk.END, self.expression)
 
-        self.update_display()
     
     def use_history(self, event):
         selected = self.history_list.get(self.history_list.curselection())
@@ -100,7 +103,3 @@ class Calculator:
             messagebox.showinfo(
                 "사록", 
                 "\n".join(f"{i+1}. {item}" for i, item in enumerate(self.history)))
-    
-    def update_display(self):
-        self.entry.delete(0, tk.END)
-        self.entry.insert(tk.END, self.expression)
