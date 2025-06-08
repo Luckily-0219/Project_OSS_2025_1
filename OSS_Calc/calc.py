@@ -65,8 +65,8 @@ class Calculator:
         else:
             self.expression += str(char)
 
-        self.update_display()
-    
+        self.entry.delete(0, tk.END)
+        self.entry.insert(tk.END, self.expression)
     def use_history(self, event):
         selected = self.history_list.get(self.history_list.curselection())
         expr = selected.split(' = ')[0]
@@ -80,7 +80,3 @@ class Calculator:
             messagebox.showinfo(
                 "사록", 
                 "\n".join(f"{i+1}. {item}" for i, item in enumerate(self.history)))
-    
-    def update_display(self):
-        self.entry.delete(0, tk.END)
-        self.entry.insert(tk.END, self.expression)
