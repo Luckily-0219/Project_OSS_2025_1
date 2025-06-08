@@ -10,7 +10,7 @@ class Calculator:
         self.expression = ""
 	self.history = []
 
-        self.history_frame = tk.LabelFrame(root, text="历史记录", font=("Arial", 12))
+        self.history_frame = tk.LabelFrame(root, text="사록", font=("Arial", 12))
         self.history_frame.pack(fill="both", expand=True, padx=10, pady=5)
 
         self.history_list = tk.Listbox(
